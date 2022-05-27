@@ -7,3 +7,5 @@ It's assumed you use rtsp on port 8554.
 You must enable API
 
 This is not productified, you must add PEM files and might have to add IPs.
+
+No planned maintenance for this.
