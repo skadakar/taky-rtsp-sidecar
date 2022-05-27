@@ -102,14 +102,14 @@
         "type": "tcp out",
         "z": "67ebfad05456a2ba",
         "name": "SEND-TO-TAK",
-        "host": "{{global.publicip}}",
+        "host": "${{global.publicip}}",
         "port": "8089",
         "beserver": "client",
         "base64": false,
         "end": true,
         "tls": "dc169dd1444aa8a5",
         "x": 1540,
-        "y": 640,
+        "y": 680,
         "wires": []
     },
     {
@@ -130,7 +130,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 320,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "9c5e1adc1b829ded"
@@ -153,7 +153,7 @@
         "senderr": false,
         "credentials": {},
         "x": 610,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "627547b2c765190d"
@@ -172,7 +172,7 @@
         "stream": false,
         "addname": "items",
         "x": 910,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "05e1d718ac3801b1"
@@ -201,7 +201,7 @@
         "repair": false,
         "outputs": 2,
         "x": 770,
-        "y": 560,
+        "y": 600,
         "wires": [
             [],
             [
@@ -218,7 +218,7 @@
         "action": "",
         "pretty": false,
         "x": 1030,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "6b4a9cc0ebba9c76"
@@ -237,7 +237,7 @@
         "finalize": "",
         "libs": [],
         "x": 1160,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "c5f1b30c960f9e80"
@@ -271,7 +271,7 @@
         "to": "",
         "reg": false,
         "x": 1320,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "03e0f4922a03801b"
@@ -287,7 +287,7 @@
         "sql": "",
         "name": "LastSeen",
         "x": 780,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "87fc9d4f0e38e032"
@@ -306,7 +306,7 @@
         "template": "SELECT\n  *\nFROM\n  LastSeen\nWHERE\n  id = \"{{ payload }}\"",
         "output": "str",
         "x": 620,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "c132c06514e426a7"
@@ -332,7 +332,7 @@
         "repair": false,
         "outputs": 2,
         "x": 950,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "2dc45a9a214062f8"
@@ -354,7 +354,7 @@
         "finalize": "",
         "libs": [],
         "x": 1140,
-        "y": 660,
+        "y": 700,
         "wires": [
             [
                 "16b8630b62dda7d9"
@@ -373,7 +373,7 @@
         "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event version=\"2.0\" uid=\"COTUID-{{ payload.name }}\" type=\"b-m-p-s-p-loc\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"{{ payload.lat }}\" lon=\"{{ payload.lon }}\" hae=\"{{ payload.hae }}\" ce=\"{{ payload.ce }}\" le=\"{{ payload.le }}\" />\n   <detail>\n      <status readiness=\"true\" />\n      <contact callsign=\"{{ payload.name }}\" />\n      <__video uid=\"VIDEOUID-{{ payload.name }}\" url=\"yellow.airsoftnorge.com:8554/{{ payload.name }}\">\n         <ConnectionEntry protocol=\"rtsp\" path=\"/{{ payload.name }}\" address=\"yellow.airsoftnorge.com\" port=\"8554\" alias=\"{{ payload.name }}\" roverPort=\"-1\" rtspReliable=\"0\" ignoreEmbeddedKLV=\"False\" networkTimeout=\"0\" bufferTime=\"-1\" />\n      </__video>\n      <precisionlocation geopointsrc=\"???\" altsrc=\"???\" />\n   </detail>\n</event>",
         "output": "str",
         "x": 1320,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "6ecd8bb991185975"
@@ -392,7 +392,7 @@
         "finalize": "",
         "libs": [],
         "x": 1140,
-        "y": 620,
+        "y": 660,
         "wires": [
             [
                 "16b8630b62dda7d9"
@@ -516,7 +516,7 @@
         "outputType": "global",
         "outTz": "Africa/Abidjan",
         "x": 530,
-        "y": 400,
+        "y": 380,
         "wires": [
             []
         ]
@@ -539,7 +539,7 @@
         "outputType": "global",
         "outTz": "Africa/Abidjan",
         "x": 530,
-        "y": 440,
+        "y": 420,
         "wires": [
             []
         ]
@@ -562,7 +562,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 270,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "8d6af2579388f9a1",
@@ -589,7 +589,7 @@
         "outputType": "global",
         "outTz": "Africa/Abidjan",
         "x": 550,
-        "y": 360,
+        "y": 340,
         "wires": [
             []
         ]
@@ -601,7 +601,7 @@
         "name": "SET GLOBAL TIME VARIABLES",
         "info": "",
         "x": 270,
-        "y": 320,
+        "y": 300,
         "wires": []
     },
     {
@@ -611,8 +611,108 @@
         "name": "CONNECTS TO RTSP-SIMPLE-SERVER AND SENDS STREAMS AS COT",
         "info": "",
         "x": 410,
-        "y": 520,
+        "y": 560,
         "wires": []
+    },
+    {
+        "id": "183ab682c917091b",
+        "type": "comment",
+        "z": "67ebfad05456a2ba",
+        "name": "LAST SEEN LOCATION OF CALLSIGN",
+        "info": "",
+        "x": 290,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "ce49611454b2f693",
+        "type": "xml",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 390,
+        "y": 520,
+        "wires": [
+            [
+                "df06b92e228a619c"
+            ]
+        ]
+    },
+    {
+        "id": "df06b92e228a619c",
+        "type": "function",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "func": "let event = msg.payload[\"event\"];\nlet _detail = event[\"detail\"];\nlet detail = _detail[0];\n\nlet name = msg.payload.event.detail[0].contact[0].$.callsign;\nlet lat = msg.payload.event.point[0].$.lat;\nlet lon = msg.payload.event.point[0].$.lon;\nlet hae = msg.payload.event.point[0].$.hae;\nlet ce = msg.payload.event.point[0].$.ce;\nlet le = msg.payload.event.point[0].$.le;\n\nmsg.payload = {\n  name: name,\n  lat: lat,\n  lon: lon,\n  hae: hae,\n  ce: ce,\n  le: le\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "72f68c5af61e9094"
+            ]
+        ]
+    },
+    {
+        "id": "72f68c5af61e9094",
+        "type": "template",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT\nOR REPLACE INTO LastSeen\nvalues\n  (\n    \"{{ payload.name }}\",\n    \"{{ payload.lat }}\",\n    \"{{ payload.lon }}\",\n    \"{{ payload.hae }}\",\n    \"{{ payload.ce }}\",\n    \"{{ payload.le }}\"\n  )",
+        "output": "str",
+        "x": 800,
+        "y": 520,
+        "wires": [
+            [
+                "80080336b4a72668"
+            ]
+        ]
+    },
+    {
+        "id": "80080336b4a72668",
+        "type": "sqlite",
+        "z": "67ebfad05456a2ba",
+        "mydb": "4e71ffcc.32ba8",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "LastSeen",
+        "x": 1000,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7d1813a620d8c2f",
+        "type": "tcp tls in",
+        "z": "67ebfad05456a2ba",
+        "name": "FETCH-FROM-TAK",
+        "server": "client",
+        "host": "${{global.publicip}}",
+        "port": "8089",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "",
+        "topic": "",
+        "base64": false,
+        "tls": "dc169dd1444aa8a5",
+        "x": 230,
+        "y": 520,
+        "wires": [
+            [
+                "ce49611454b2f693"
+            ]
+        ]
     },
     {
         "id": "4e71ffcc.32ba8",
