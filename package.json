@@ -1,0 +1,13 @@
+{
+    "name": "node-red-project",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "node-red-contrib-ip": "~1.0.1",
+        "node-red-contrib-moment": "~4.0.0",
+        "node-red-contrib-tcp-tls": "~1.0.1",
+        "node-red-contrib-web-worldmap": "~2.28.1",
+        "node-red-node-sqlite": "~1.0.3"
+    }
+}
