@@ -1,0 +1,521 @@
+[
+    {
+        "id": "b41d752aa05010ef",
+        "type": "inject",
+        "z": "67ebfad05456a2ba",
+        "name": "CREATE",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "CREATE TABLE LastSeen(id TEXT PRIMARY KEY, lat TEXT, lon TEXT, hae TEXT, ce TEXT, le TEXT)",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "475f3022d2eda5f0"
+            ]
+        ]
+    },
+    {
+        "id": "538ba092a6809622",
+        "type": "inject",
+        "z": "67ebfad05456a2ba",
+        "name": "DROP TABLE",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "DROP TABLE LastSeen",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "475f3022d2eda5f0"
+            ]
+        ]
+    },
+    {
+        "id": "475f3022d2eda5f0",
+        "type": "sqlite",
+        "z": "67ebfad05456a2ba",
+        "mydb": "4e71ffcc.32ba8",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "LastSeen",
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "a643579e94b9f398"
+            ]
+        ]
+    },
+    {
+        "id": "a643579e94b9f398",
+        "type": "debug",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 670,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7da37bd2478b60a6",
+        "type": "comment",
+        "z": "67ebfad05456a2ba",
+        "name": "CREATE DATABASES",
+        "info": "",
+        "x": 240,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6ecd8bb991185975",
+        "type": "tcp out",
+        "z": "67ebfad05456a2ba",
+        "name": "SEND-TO-TAK",
+        "host": "{{global.publicip}}",
+        "port": "8089",
+        "beserver": "client",
+        "base64": false,
+        "end": true,
+        "tls": "dc169dd1444aa8a5",
+        "x": 1540,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3db9755b5b0e6862",
+        "type": "inject",
+        "z": "67ebfad05456a2ba",
+        "name": "Start of simple video server propegator",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 320,
+        "wires": [
+            [
+                "9c5e1adc1b829ded"
+            ]
+        ]
+    },
+    {
+        "id": "9c5e1adc1b829ded",
+        "type": "http request",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:9997/v1/paths/list",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "credentials": {},
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "627547b2c765190d"
+            ]
+        ]
+    },
+    {
+        "id": "958345470e0f69de",
+        "type": "split",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "items",
+        "x": 910,
+        "y": 320,
+        "wires": [
+            [
+                "05e1d718ac3801b1"
+            ]
+        ]
+    },
+    {
+        "id": "627547b2c765190d",
+        "type": "switch",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "{\"items\":{}}",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 770,
+        "y": 320,
+        "wires": [
+            [],
+            [
+                "958345470e0f69de"
+            ]
+        ]
+    },
+    {
+        "id": "05e1d718ac3801b1",
+        "type": "json",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1030,
+        "y": 320,
+        "wires": [
+            [
+                "6b4a9cc0ebba9c76"
+            ]
+        ]
+    },
+    {
+        "id": "6b4a9cc0ebba9c76",
+        "type": "function",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "func": "msg.payload = Object.keys(msg.payload.items);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 320,
+        "wires": [
+            [
+                "c5f1b30c960f9e80"
+            ]
+        ]
+    },
+    {
+        "id": "c5f1b30c960f9e80",
+        "type": "change",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "backupname",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1320,
+        "y": 320,
+        "wires": [
+            [
+                "03e0f4922a03801b"
+            ]
+        ]
+    },
+    {
+        "id": "c132c06514e426a7",
+        "type": "sqlite",
+        "z": "67ebfad05456a2ba",
+        "mydb": "4e71ffcc.32ba8",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "LastSeen",
+        "x": 780,
+        "y": 400,
+        "wires": [
+            [
+                "87fc9d4f0e38e032"
+            ]
+        ]
+    },
+    {
+        "id": "03e0f4922a03801b",
+        "type": "template",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT\n  *\nFROM\n  LastSeen\nWHERE\n  id = \"{{ payload }}\"",
+        "output": "str",
+        "x": 620,
+        "y": 400,
+        "wires": [
+            [
+                "c132c06514e426a7"
+            ]
+        ]
+    },
+    {
+        "id": "87fc9d4f0e38e032",
+        "type": "switch",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 950,
+        "y": 400,
+        "wires": [
+            [
+                "2dc45a9a214062f8"
+            ],
+            [
+                "7d402d426f08a426"
+            ]
+        ]
+    },
+    {
+        "id": "7d402d426f08a426",
+        "type": "function",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "func": "name = msg.payload[0].id;\nlat = msg.payload[0].lat;\nlon = msg.payload[0].lon;\nhae = msg.payload[0].hae;\nce = msg.payload[0].ce;\nle = msg.payload[0].le;\n\nmsg.payload = {\n  name: name,\n  lat: lat,\n  lon: lon,\n  hae: hae,\n  ce: ce,\n  le: le\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 420,
+        "wires": [
+            [
+                "16b8630b62dda7d9"
+            ]
+        ]
+    },
+    {
+        "id": "16b8630b62dda7d9",
+        "type": "template",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event version=\"2.0\" uid=\"COTUID-{{ payload.name }}\" type=\"b-m-p-s-p-loc\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"{{ payload.lat }}\" lon=\"{{ payload.lon }}\" hae=\"{{ payload.hae }}\" ce=\"{{ payload.ce }}\" le=\"{{ payload.le }}\" />\n   <detail>\n      <status readiness=\"true\" />\n      <contact callsign=\"{{ payload.name }}\" />\n      <__video uid=\"VIDEOUID-{{ payload.name }}\" url=\"yellow.airsoftnorge.com:8554/{{ payload.name }}\">\n         <ConnectionEntry protocol=\"rtsp\" path=\"/{{ payload.name }}\" address=\"yellow.airsoftnorge.com\" port=\"8554\" alias=\"{{ payload.name }}\" roverPort=\"-1\" rtspReliable=\"0\" ignoreEmbeddedKLV=\"False\" networkTimeout=\"0\" bufferTime=\"-1\" />\n      </__video>\n      <precisionlocation geopointsrc=\"???\" altsrc=\"???\" />\n   </detail>\n</event>",
+        "output": "str",
+        "x": 1320,
+        "y": 400,
+        "wires": [
+            [
+                "6ecd8bb991185975"
+            ]
+        ]
+    },
+    {
+        "id": "2dc45a9a214062f8",
+        "type": "function",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "func": "name = msg.backupname;\n\n\nmsg.payload = {\n  name: name,\n  lat: \"0.0\",\n  lon: \"0.0\",\n  hae: \"0.0\",\n  ce: \"99999\",\n  le: \"99999\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 380,
+        "wires": [
+            [
+                "16b8630b62dda7d9"
+            ]
+        ]
+    },
+    {
+        "id": "28cc8df843238461",
+        "type": "ip",
+        "z": "67ebfad05456a2ba",
+        "name": "ip",
+        "https": false,
+        "timeout": "5000",
+        "internalIPv4": false,
+        "internalIPv6": false,
+        "publicIPv4": true,
+        "publicIPv6": false,
+        "x": 510,
+        "y": 260,
+        "wires": [
+            [
+                "4386bd5c8556e316"
+            ]
+        ]
+    },
+    {
+        "id": "b192032cd2ec1608",
+        "type": "inject",
+        "z": "67ebfad05456a2ba",
+        "name": "SET global.publicip",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "18000",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 260,
+        "wires": [
+            [
+                "28cc8df843238461"
+            ]
+        ]
+    },
+    {
+        "id": "4386bd5c8556e316",
+        "type": "json",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 690,
+        "y": 260,
+        "wires": [
+            [
+                "6dd61e9f5e859695"
+            ]
+        ]
+    },
+    {
+        "id": "6dd61e9f5e859695",
+        "type": "change",
+        "z": "67ebfad05456a2ba",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.publicIPv4",
+                "pt": "msg",
+                "to": "publicip",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4da6314b2a9967b5",
+        "type": "comment",
+        "z": "67ebfad05456a2ba",
+        "name": "SET GLOBAL PUBLIC IP",
+        "info": "",
+        "x": 250,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "4e71ffcc.32ba8",
+        "type": "sqlitedb",
+        "db": ":memory:",
+        "mode": "RWC"
+    },
+    {
+        "id": "dc169dd1444aa8a5",
+        "type": "tls-config",
+        "name": "ASN TAK LOGIN",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "crtfile.crt",
+        "keyname": "keyfile.pem",
+        "caname": "ca.crt",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]
