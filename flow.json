@@ -109,7 +109,7 @@
         "end": true,
         "tls": "dc169dd1444aa8a5",
         "x": 1540,
-        "y": 400,
+        "y": 640,
         "wires": []
     },
     {
@@ -130,7 +130,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 320,
-        "y": 320,
+        "y": 560,
         "wires": [
             [
                 "9c5e1adc1b829ded"
@@ -153,7 +153,7 @@
         "senderr": false,
         "credentials": {},
         "x": 610,
-        "y": 320,
+        "y": 560,
         "wires": [
             [
                 "627547b2c765190d"
@@ -172,7 +172,7 @@
         "stream": false,
         "addname": "items",
         "x": 910,
-        "y": 320,
+        "y": 560,
         "wires": [
             [
                 "05e1d718ac3801b1"
@@ -201,7 +201,7 @@
         "repair": false,
         "outputs": 2,
         "x": 770,
-        "y": 320,
+        "y": 560,
         "wires": [
             [],
             [
@@ -218,7 +218,7 @@
         "action": "",
         "pretty": false,
         "x": 1030,
-        "y": 320,
+        "y": 560,
         "wires": [
             [
                 "6b4a9cc0ebba9c76"
@@ -237,7 +237,7 @@
         "finalize": "",
         "libs": [],
         "x": 1160,
-        "y": 320,
+        "y": 560,
         "wires": [
             [
                 "c5f1b30c960f9e80"
@@ -271,7 +271,7 @@
         "to": "",
         "reg": false,
         "x": 1320,
-        "y": 320,
+        "y": 560,
         "wires": [
             [
                 "03e0f4922a03801b"
@@ -287,7 +287,7 @@
         "sql": "",
         "name": "LastSeen",
         "x": 780,
-        "y": 400,
+        "y": 640,
         "wires": [
             [
                 "87fc9d4f0e38e032"
@@ -306,7 +306,7 @@
         "template": "SELECT\n  *\nFROM\n  LastSeen\nWHERE\n  id = \"{{ payload }}\"",
         "output": "str",
         "x": 620,
-        "y": 400,
+        "y": 640,
         "wires": [
             [
                 "c132c06514e426a7"
@@ -332,7 +332,7 @@
         "repair": false,
         "outputs": 2,
         "x": 950,
-        "y": 400,
+        "y": 640,
         "wires": [
             [
                 "2dc45a9a214062f8"
@@ -354,7 +354,7 @@
         "finalize": "",
         "libs": [],
         "x": 1140,
-        "y": 420,
+        "y": 660,
         "wires": [
             [
                 "16b8630b62dda7d9"
@@ -373,7 +373,7 @@
         "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event version=\"2.0\" uid=\"COTUID-{{ payload.name }}\" type=\"b-m-p-s-p-loc\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"{{ payload.lat }}\" lon=\"{{ payload.lon }}\" hae=\"{{ payload.hae }}\" ce=\"{{ payload.ce }}\" le=\"{{ payload.le }}\" />\n   <detail>\n      <status readiness=\"true\" />\n      <contact callsign=\"{{ payload.name }}\" />\n      <__video uid=\"VIDEOUID-{{ payload.name }}\" url=\"yellow.airsoftnorge.com:8554/{{ payload.name }}\">\n         <ConnectionEntry protocol=\"rtsp\" path=\"/{{ payload.name }}\" address=\"yellow.airsoftnorge.com\" port=\"8554\" alias=\"{{ payload.name }}\" roverPort=\"-1\" rtspReliable=\"0\" ignoreEmbeddedKLV=\"False\" networkTimeout=\"0\" bufferTime=\"-1\" />\n      </__video>\n      <precisionlocation geopointsrc=\"???\" altsrc=\"???\" />\n   </detail>\n</event>",
         "output": "str",
         "x": 1320,
-        "y": 400,
+        "y": 640,
         "wires": [
             [
                 "6ecd8bb991185975"
@@ -392,7 +392,7 @@
         "finalize": "",
         "libs": [],
         "x": 1140,
-        "y": 380,
+        "y": 620,
         "wires": [
             [
                 "16b8630b62dda7d9"
@@ -496,6 +496,122 @@
         "info": "",
         "x": 250,
         "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8d6af2579388f9a1",
+        "type": "moment",
+        "z": "67ebfad05456a2ba",
+        "name": "STALETIME",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "Africa/Abidjan",
+        "adjAmount": "5",
+        "adjType": "minutes",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en-US",
+        "output": "staletime",
+        "outputType": "global",
+        "outTz": "Africa/Abidjan",
+        "x": 530,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ba8f6b8788587ff1",
+        "type": "moment",
+        "z": "67ebfad05456a2ba",
+        "name": "STARTTIME",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "Africa/Abidjan",
+        "adjAmount": "0",
+        "adjType": "minutes",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en-US",
+        "output": "starttime",
+        "outputType": "global",
+        "outTz": "Africa/Abidjan",
+        "x": 530,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7bcf55c87370375",
+        "type": "inject",
+        "z": "67ebfad05456a2ba",
+        "name": "SET TIME VARIABLES",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 360,
+        "wires": [
+            [
+                "8d6af2579388f9a1",
+                "ba8f6b8788587ff1",
+                "60545bc1e8557463"
+            ]
+        ]
+    },
+    {
+        "id": "60545bc1e8557463",
+        "type": "moment",
+        "z": "67ebfad05456a2ba",
+        "name": "VIDEOSTALETIME",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "Africa/Abidjan",
+        "adjAmount": "1",
+        "adjType": "minutes",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en-US",
+        "output": "staletime",
+        "outputType": "global",
+        "outTz": "Africa/Abidjan",
+        "x": 550,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "df50323815459070",
+        "type": "comment",
+        "z": "67ebfad05456a2ba",
+        "name": "SET GLOBAL TIME VARIABLES",
+        "info": "",
+        "x": 270,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6a88c96fbe325db2",
+        "type": "comment",
+        "z": "67ebfad05456a2ba",
+        "name": "CONNECTS TO RTSP-SIMPLE-SERVER AND SENDS STREAMS AS COT",
+        "info": "",
+        "x": 410,
+        "y": 520,
         "wires": []
     },
     {
