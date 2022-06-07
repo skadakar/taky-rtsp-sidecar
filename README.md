@@ -1,5 +1,11 @@
 ### TAKY RTSP Server sidecar
 
+https://github.com/skadakar/taky-rtsp-sidecar
+
+https://hub.docker.com/r/skadakar/taky-rtsp-sidecar
+
+
+
 Self contained RTSP missing link for taky, forcing 8554 port usage and RTSP.
 
 It will also keep track of peoples last locations and attempt to match locations of videofeeds to users with the same name.
