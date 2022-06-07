@@ -5,10 +5,11 @@ WORK IN PROGRESS!
 Self contained RTSP missing link for taky, forcing 8554 port usage and RTSP.
 
 
-To get your tak server keys
+Keys must be provided in pem/crt/key
 
+They must be attached to the container like so: 
 ```
-openssl pkcs12 -in user.p12 -out crtfile.crt -nokeys -clcerts
-openssl pkcs12 -in server.p12 -out ca.crt -cacerts -nokeys
-openssl pkcs12 -in user.p12 -nokeys -out publiccert.pem
+      - /whatever/ca.pem:/data/certs/ca.pem
+      - /whatever/server.pem:/data/certs/server.pem
+      - /whatever/server.key:/data/certs/server.key
 ```
