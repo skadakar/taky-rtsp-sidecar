@@ -1,5 +1,33 @@
 [
     {
+        "id": "242de052319dd764",
+        "type": "tab",
+        "label": "TAK RTSP SIDECAR",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4e71ffcc.32ba8",
+        "type": "sqlitedb",
+        "db": ":memory:",
+        "mode": "RWC"
+    },
+    {
+        "id": "dc169dd1444aa8a5",
+        "type": "tls-config",
+        "name": "TAK SSL",
+        "cert": "/data/certs/server.pem",
+        "key": "/data/certs/server.key",
+        "ca": "/data/certs/ca.pem",
+        "certname": "crtfile.crt",
+        "keyname": "keyfile.pem",
+        "caname": "ca.crt",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    },
+    {
         "id": "b41d752aa05010ef",
         "type": "inject",
         "z": "242de052319dd764",
@@ -82,7 +110,10 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
         "x": 670,
         "y": 120,
         "wires": []
@@ -369,7 +400,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event version=\"2.0\" uid=\"COTUID-{{ payload.name }}\" type=\"b-m-p-s-p-loc\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"{{ payload.lat }}\" lon=\"{{ payload.lon }}\" hae=\"{{ payload.hae }}\" ce=\"{{ payload.ce }}\" le=\"{{ payload.le }}\" />\n   <detail>\n      <status readiness=\"true\" />\n      <contact callsign=\"{{ payload.name }}\" />\n      <__video uid=\"VIDEOUID-{{ payload.name }}\" url=\"yellow.airsoftnorge.com:8554/{{ payload.name }}\">\n         <ConnectionEntry protocol=\"rtsp\" path=\"/{{ payload.name }}\" address=\"yellow.airsoftnorge.com\" port=\"8554\" alias=\"{{ payload.name }}\" roverPort=\"-1\" rtspReliable=\"0\" ignoreEmbeddedKLV=\"False\" networkTimeout=\"0\" bufferTime=\"-1\" />\n      </__video>\n      <precisionlocation geopointsrc=\"???\" altsrc=\"???\" />\n   </detail>\n</event>",
+        "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event version=\"2.0\" uid=\"COTUID-{{ payload.name }}\" type=\"b-m-p-s-p-loc\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"{{ payload.lat }}\" lon=\"{{ payload.lon }}\" hae=\"{{ payload.hae }}\" ce=\"{{ payload.ce }}\" le=\"{{ payload.le }}\" />\n   <detail>\n      <status readiness=\"true\" />\n      <contact callsign=\"{{ payload.name }}\" />\n      <__video uid=\"VIDEOUID-{{ payload.name }}\" url=\"{{global.ip}}:8554/{{ payload.name }}\">\n         <ConnectionEntry protocol=\"rtsp\" path=\"/{{ payload.name }}\" address=\"{{global.ip}}\" port=\"8554\" alias=\"{{ payload.name }}\" roverPort=\"-1\" rtspReliable=\"0\" ignoreEmbeddedKLV=\"False\" networkTimeout=\"0\" bufferTime=\"-1\" />\n      </__video>\n      <precisionlocation geopointsrc=\"???\" altsrc=\"???\" />\n   </detail>\n</event>",
         "output": "str",
         "x": 1340,
         "y": 740,
@@ -413,7 +444,8 @@
         "y": 260,
         "wires": [
             [
-                "4386bd5c8556e316"
+                "e54b662190b755ba",
+                "61ee7d44186e0790"
             ]
         ]
     },
@@ -444,47 +476,6 @@
             [
                 "28cc8df843238461"
             ]
-        ]
-    },
-    {
-        "id": "4386bd5c8556e316",
-        "type": "json",
-        "z": "242de052319dd764",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 690,
-        "y": 260,
-        "wires": [
-            [
-                "6dd61e9f5e859695"
-            ]
-        ]
-    },
-    {
-        "id": "6dd61e9f5e859695",
-        "type": "change",
-        "z": "242de052319dd764",
-        "name": "",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload.publicIPv4",
-                "pt": "msg",
-                "to": "publicip",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 950,
-        "y": 260,
-        "wires": [
-            []
         ]
     },
     {
@@ -714,23 +705,64 @@
         ]
     },
     {
-        "id": "4e71ffcc.32ba8",
-        "type": "sqlitedb",
-        "db": ":memory:",
-        "mode": "RWC"
+        "id": "e54b662190b755ba",
+        "type": "change",
+        "z": "242de052319dd764",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.publicIPv4",
+                "pt": "msg",
+                "to": "ip",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 260,
+        "wires": [
+            [
+                "3b37e3bade9b65a4"
+            ]
+        ]
     },
     {
-        "id": "dc169dd1444aa8a5",
-        "type": "tls-config",
-        "name": "TAK SSL",
-        "cert": "/data/certs/server.pem",
-        "key": "/data/certs/server.key",
-        "ca": "/data/certs/ca.pem",
-        "certname": "crtfile.crt",
-        "keyname": "keyfile.pem",
-        "caname": "ca.crt",
-        "servername": "",
-        "verifyservercert": false,
-        "alpnprotocol": ""
+        "id": "3b37e3bade9b65a4",
+        "type": "debug",
+        "z": "242de052319dd764",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "61ee7d44186e0790",
+        "type": "debug",
+        "z": "242de052319dd764",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 340,
+        "wires": []
     }
 ]
