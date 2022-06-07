@@ -93,7 +93,7 @@
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "LastSeen",
-        "x": 460,
+        "x": 520,
         "y": 120,
         "wires": [
             [
@@ -106,7 +106,7 @@
         "type": "debug",
         "z": "242de052319dd764",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -139,8 +139,8 @@
         "base64": false,
         "end": true,
         "tls": "dc169dd1444aa8a5",
-        "x": 1560,
-        "y": 740,
+        "x": 1760,
+        "y": 680,
         "wires": []
     },
     {
@@ -161,7 +161,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 320,
-        "y": 620,
+        "y": 760,
         "wires": [
             [
                 "9c5e1adc1b829ded"
@@ -183,7 +183,7 @@
         "authType": "",
         "senderr": false,
         "x": 610,
-        "y": 620,
+        "y": 760,
         "wires": [
             [
                 "627547b2c765190d"
@@ -202,7 +202,7 @@
         "stream": false,
         "addname": "items",
         "x": 910,
-        "y": 620,
+        "y": 760,
         "wires": [
             [
                 "05e1d718ac3801b1"
@@ -231,7 +231,7 @@
         "repair": false,
         "outputs": 2,
         "x": 770,
-        "y": 620,
+        "y": 760,
         "wires": [
             [],
             [
@@ -248,7 +248,7 @@
         "action": "",
         "pretty": false,
         "x": 1030,
-        "y": 620,
+        "y": 760,
         "wires": [
             [
                 "6b4a9cc0ebba9c76"
@@ -267,7 +267,7 @@
         "finalize": "",
         "libs": [],
         "x": 1160,
-        "y": 620,
+        "y": 760,
         "wires": [
             [
                 "c5f1b30c960f9e80"
@@ -301,7 +301,7 @@
         "to": "",
         "reg": false,
         "x": 1320,
-        "y": 620,
+        "y": 760,
         "wires": [
             [
                 "03e0f4922a03801b"
@@ -317,7 +317,7 @@
         "sql": "",
         "name": "LastSeen",
         "x": 800,
-        "y": 740,
+        "y": 880,
         "wires": [
             [
                 "87fc9d4f0e38e032"
@@ -336,7 +336,7 @@
         "template": "SELECT\n  *\nFROM\n  LastSeen\nWHERE\n  id = \"{{ payload }}\"",
         "output": "str",
         "x": 640,
-        "y": 740,
+        "y": 880,
         "wires": [
             [
                 "c132c06514e426a7"
@@ -362,7 +362,7 @@
         "repair": false,
         "outputs": 2,
         "x": 970,
-        "y": 740,
+        "y": 880,
         "wires": [
             [
                 "2dc45a9a214062f8"
@@ -384,7 +384,7 @@
         "finalize": "",
         "libs": [],
         "x": 1160,
-        "y": 760,
+        "y": 900,
         "wires": [
             [
                 "16b8630b62dda7d9"
@@ -403,7 +403,7 @@
         "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event version=\"2.0\" uid=\"COTUID-{{ payload.name }}\" type=\"b-m-p-s-p-loc\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"{{ payload.lat }}\" lon=\"{{ payload.lon }}\" hae=\"{{ payload.hae }}\" ce=\"{{ payload.ce }}\" le=\"{{ payload.le }}\" />\n   <detail>\n      <status readiness=\"true\" />\n      <contact callsign=\"{{ payload.name }}\" />\n      <__video uid=\"VIDEOUID-{{ payload.name }}\" url=\"{{global.ip}}:8554/{{ payload.name }}\">\n         <ConnectionEntry protocol=\"rtsp\" path=\"/{{ payload.name }}\" address=\"{{global.ip}}\" port=\"8554\" alias=\"{{ payload.name }}\" roverPort=\"-1\" rtspReliable=\"0\" ignoreEmbeddedKLV=\"False\" networkTimeout=\"0\" bufferTime=\"-1\" />\n      </__video>\n      <precisionlocation geopointsrc=\"???\" altsrc=\"???\" />\n   </detail>\n</event>",
         "output": "str",
         "x": 1340,
-        "y": 740,
+        "y": 880,
         "wires": [
             [
                 "6ecd8bb991185975"
@@ -422,7 +422,7 @@
         "finalize": "",
         "libs": [],
         "x": 1160,
-        "y": 720,
+        "y": 860,
         "wires": [
             [
                 "16b8630b62dda7d9"
@@ -444,8 +444,7 @@
         "y": 260,
         "wires": [
             [
-                "e54b662190b755ba",
-                "61ee7d44186e0790"
+                "e54b662190b755ba"
             ]
         ]
     },
@@ -601,7 +600,7 @@
         "name": "CONNECTS TO RTSP-SIMPLE-SERVER AND SENDS STREAMS AS COT",
         "info": "",
         "x": 410,
-        "y": 580,
+        "y": 720,
         "wires": []
     },
     {
@@ -622,7 +621,7 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 390,
+        "x": 510,
         "y": 520,
         "wires": [
             [
@@ -641,7 +640,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
+        "x": 640,
         "y": 520,
         "wires": [
             [
@@ -660,7 +659,7 @@
         "syntax": "mustache",
         "template": "INSERT\nOR REPLACE INTO LastSeen\nvalues\n  (\n    \"{{ payload.name }}\",\n    \"{{ payload.lat }}\",\n    \"{{ payload.lon }}\",\n    \"{{ payload.hae }}\",\n    \"{{ payload.ce }}\",\n    \"{{ payload.le }}\"\n  )",
         "output": "str",
-        "x": 800,
+        "x": 780,
         "y": 520,
         "wires": [
             [
@@ -676,10 +675,12 @@
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "LastSeen",
-        "x": 1000,
+        "x": 920,
         "y": 520,
         "wires": [
-            []
+            [
+                "846ad76b214b0523"
+            ]
         ]
     },
     {
@@ -700,7 +701,8 @@
         "y": 520,
         "wires": [
             [
-                "ce49611454b2f693"
+                "ce49611454b2f693",
+                "d054deae8ff0f417"
             ]
         ]
     },
@@ -723,7 +725,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 930,
+        "x": 710,
         "y": 260,
         "wires": [
             [
@@ -736,7 +738,7 @@
         "type": "debug",
         "z": "242de052319dd764",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -744,25 +746,169 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1210,
+        "x": 910,
         "y": 260,
         "wires": []
     },
     {
-        "id": "61ee7d44186e0790",
+        "id": "846ad76b214b0523",
         "type": "debug",
         "z": "242de052319dd764",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 890,
-        "y": 340,
+        "x": 1070,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "83313d60ee8b2f5e",
+        "type": "switch",
+        "z": "242de052319dd764",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": ">del<",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "cont",
+                "v": "<archive/>",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 620,
+        "wires": [
+            [
+                "13188eff2d082b19"
+            ],
+            [
+                "f82cb6638b7e8621"
+            ]
+        ]
+    },
+    {
+        "id": "d054deae8ff0f417",
+        "type": "switch",
+        "z": "242de052319dd764",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "<link",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 510,
+        "y": 620,
+        "wires": [
+            [
+                "83313d60ee8b2f5e"
+            ]
+        ]
+    },
+    {
+        "id": "f82cb6638b7e8621",
+        "type": "change",
+        "z": "242de052319dd764",
+        "name": "ARCHIVE REMOVAL",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "<archive/>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 640,
+        "wires": [
+            [
+                "6ecd8bb991185975"
+            ]
+        ]
+    },
+    {
+        "id": "13188eff2d082b19",
+        "type": "change",
+        "z": "242de052319dd764",
+        "name": "NULL ISLAND AND NUKE",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "<point*.*<detail>",
+                "fromt": "re",
+                "to": "<point lat=\"0.0\" lon=\"0.0\" hae=\"9999999.0\" ce=\"9999999.0\" le=\"9999999.0\" /><detail>",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "<archive/>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "stale=\"*....",
+                "fromt": "re",
+                "to": "stale=\"1990",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 600,
+        "wires": [
+            [
+                "6ecd8bb991185975"
+            ]
+        ]
+    },
+    {
+        "id": "714c548d9a7a0c06",
+        "type": "comment",
+        "z": "242de052319dd764",
+        "name": "BONUS FEATURE!",
+        "info": "Add the remark `del` to a marker to have it be nuked from the server. ",
+        "x": 230,
+        "y": 620,
         "wires": []
     }
 ]
