@@ -1,8 +1,12 @@
-### taky-rtsp-sidecar
-
-WORK IN PROGRESS!
+### TAKY RTSP Server sidecar
 
 Self contained RTSP missing link for taky, forcing 8554 port usage and RTSP.
+
+It will also keep track of peoples last locations and attempt to match locations of videofeeds to users with the same name.
+Bob1 will be given the same location as rtsp://example.com/Bob1
+
+This implimentation should be server agnostic, but only tested on taky.
+
 
 Keys must be provided in pem/crt/key
 
