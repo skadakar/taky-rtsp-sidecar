@@ -4,7 +4,6 @@ WORK IN PROGRESS!
 
 Self contained RTSP missing link for taky, forcing 8554 port usage and RTSP.
 
-
 Keys must be provided in pem/crt/key
 
 They must be attached to the container like so: 
