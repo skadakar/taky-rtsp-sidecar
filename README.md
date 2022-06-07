@@ -20,7 +20,7 @@ They must be attached to the container like so:
 
 ### Bonus feature!
 
-Add `del`as a remark to any COT you want gone. For a better version of this check forcedelete from Hayt here:
+Add `del`as a remark to any marker you want gone. For a better version of this check forcedelete from Hayt here:
 
 https://drive.google.com/drive/folders/1o8tsalgxUGxdg2HiDw5xVu_-bnr63F3d?usp=sharing
 
