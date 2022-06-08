@@ -13,7 +13,7 @@ services:
       - /root/rtsp/rtsp-simple-server.yml:/rtsp-simple-server.yml
 #NODE-RED
    node-red:
-    container_name: node-red
+    container_name: taky-rtsp-sidecar
     user: "1000"
     network_mode: host
     restart: unless-stopped
