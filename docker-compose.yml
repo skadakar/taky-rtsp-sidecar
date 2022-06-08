@@ -21,8 +21,8 @@ services:
     ports:
       - "1880:1880"
     environment:
-      - IP=127.0.0.1
-      - PORT=8089
+      - COT_IP=127.0.0.1
+      - COT_PORT=8089
     volumes:
       - /root/node-red/certs/ca.pem:/data/certs/ca.pem
       - /root/node-red/certs/server.pem:/data/certs/server.pem
