@@ -13,7 +13,14 @@ It will also keep track of peoples last locations and attempt to match locations
 Bob1 will be given the same location as rtsp://example.com/Bob1
 
 This implimentation should be server agnostic, but only tested on taky.
+#### The RTSP Sidecar MUST be located on the same host as the RTSP server!
 
+Supported env variables:
+```
+    environment:
+      - IP=127.0.0.1
+      - PORT=8089
+```
 
 Keys must be provided in pem/crt/key
 
