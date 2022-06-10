@@ -15,6 +15,8 @@ Bob1 will be given the same location as rtsp://example.com/Bob1
 This implimentation should be server agnostic, but only tested on taky.
 #### The RTSP Sidecar MUST be located on the same host as the RTSP server!
 
+Overwrite settings by attaching config files to the /data/ folder, as with normal node-red docker.
+
 Supported env variables:
 ```
     environment:
