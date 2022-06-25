@@ -779,24 +779,16 @@
                 "v": ">del<",
                 "vt": "str",
                 "case": false
-            },
-            {
-                "t": "cont",
-                "v": "<archive/>",
-                "vt": "str"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 2,
+        "outputs": 1,
         "x": 630,
         "y": 620,
         "wires": [
             [
                 "13188eff2d082b19"
-            ],
-            [
-                "f82cb6638b7e8621"
             ]
         ]
     },
@@ -822,35 +814,6 @@
         "wires": [
             [
                 "83313d60ee8b2f5e"
-            ]
-        ]
-    },
-    {
-        "id": "f82cb6638b7e8621",
-        "type": "change",
-        "z": "242de052319dd764",
-        "name": "ARCHIVE REMOVAL",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "<archive/>",
-                "fromt": "str",
-                "to": "",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 800,
-        "y": 640,
-        "wires": [
-            [
-                "6ecd8bb991185975"
             ]
         ]
     },
@@ -893,8 +856,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 820,
-        "y": 600,
+        "x": 840,
+        "y": 620,
         "wires": [
             [
                 "6ecd8bb991185975"
