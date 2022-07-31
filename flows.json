@@ -137,7 +137,7 @@
         "port": "${COT_PORT}",
         "beserver": "client",
         "base64": false,
-        "end": true,
+        "end": false,
         "tls": "dc169dd1444aa8a5",
         "x": 1760,
         "y": 680,
