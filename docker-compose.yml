@@ -9,8 +9,6 @@ services:
     restart: unless-stopped
     environment:
       - RTSP_PROTOCOLS=tcp
-    volumes:
-      - /root/rtsp/rtsp-simple-server.yml:/rtsp-simple-server.yml
 #NODE-RED
    node-red:
     container_name: taky-rtsp-sidecar
