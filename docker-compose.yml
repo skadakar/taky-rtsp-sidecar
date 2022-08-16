@@ -16,8 +16,6 @@ services:
     network_mode: host
     restart: unless-stopped
     image: skadakar/taky-rtsp-sidecar:latest
-    ports:
-      - "1880:1880"
     environment:
       - COT_IP=127.0.0.1
       - COT_PORT=8089
