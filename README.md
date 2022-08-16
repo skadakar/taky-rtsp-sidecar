@@ -32,6 +32,12 @@ They must be attached to the container like so:
       - /whatever/server.pem:/data/certs/server.pem
       - /whatever/server.key:/data/certs/server.key
 ```
+Using the atak client package the commands look something like this
+```
+openssl pkcs12 -in atak-920a214a-733b-4780-bd2e-34f21b8a49ae.p12 -out client.pem -clcerts -nokeys
+openssl pkcs12 -in atak-920a214a-733b-4780-bd2e-34f21b8a49ae.p12 -nocerts -out server.key -nodes
+openssl pkcs12 -in server-d166795f-f546-4ab9-aa15-25954424987a.p12 -out server.pem -nodes
+```
 
 ### Bonus feature!
 
