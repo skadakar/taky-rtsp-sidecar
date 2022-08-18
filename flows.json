@@ -1,31 +1,18 @@
 [
     {
-        "id": "cfdaac38e6a0b145",
-        "type": "tab",
-        "label": "TAK ASN SIDECAR",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "4e71ffcc.32ba8",
-        "type": "sqlitedb",
-        "db": ":memory:",
-        "mode": "RWC"
-    },
-    {
-        "id": "dc169dd1444aa8a5",
-        "type": "tls-config",
-        "name": "TAK SSL",
-        "cert": "/data/certs/server.pem",
-        "key": "/data/certs/server.key",
-        "ca": "/data/certs/ca.pem",
-        "certname": "crtfile.crt",
-        "keyname": "keyfile.pem",
-        "caname": "ca.crt",
-        "servername": "",
-        "verifyservercert": false,
-        "alpnprotocol": ""
+        "id": "7dac542fdde70908",
+        "type": "tcp out",
+        "z": "cfdaac38e6a0b145",
+        "name": "SEND-TO-TAK",
+        "host": "${COT_IP}",
+        "port": "${COT_PORT}",
+        "beserver": "client",
+        "base64": false,
+        "end": false,
+        "tls": "dc169dd1444aa8a5",
+        "x": 1760,
+        "y": 840,
+        "wires": []
     },
     {
         "id": "b78dc12070421d5c",
@@ -126,21 +113,6 @@
         "info": "",
         "x": 240,
         "y": 40,
-        "wires": []
-    },
-    {
-        "id": "7dac542fdde70908",
-        "type": "tcp out",
-        "z": "cfdaac38e6a0b145",
-        "name": "SEND-TO-TAK",
-        "host": "${COT_IP}",
-        "port": "${COT_PORT}",
-        "beserver": "client",
-        "base64": false,
-        "end": false,
-        "tls": "dc169dd1444aa8a5",
-        "x": 1760,
-        "y": 840,
         "wires": []
     },
     {
@@ -877,70 +849,6 @@
         "wires": []
     },
     {
-        "id": "0f7b81ae56a90cea",
-        "type": "inject",
-        "z": "cfdaac38e6a0b145",
-        "name": "CHECK FOR NEW USERS",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "15",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 280,
-        "y": 1240,
-        "wires": [
-            [
-                "ac2f7aeb134767a7"
-            ]
-        ]
-    },
-    {
-        "id": "8e94597b25c3c9db",
-        "type": "sqlite",
-        "z": "cfdaac38e6a0b145",
-        "mydb": "4e71ffcc.32ba8",
-        "sqlquery": "msg.topic",
-        "sql": "",
-        "name": "FirtSeen",
-        "x": 700,
-        "y": 1240,
-        "wires": [
-            [
-                "acad3dfe57b8629e"
-            ]
-        ]
-    },
-    {
-        "id": "ac2f7aeb134767a7",
-        "type": "template",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "field": "topic",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "SELECT\n  *\nFROM\n  FirtSeen",
-        "output": "str",
-        "x": 520,
-        "y": 1240,
-        "wires": [
-            [
-                "8e94597b25c3c9db"
-            ]
-        ]
-    },
-    {
         "id": "f89b99464997a53f",
         "type": "template",
         "z": "cfdaac38e6a0b145",
@@ -1081,25 +989,6 @@
         "wires": []
     },
     {
-        "id": "aee342a0874ef1b7",
-        "type": "template",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<event version=\"2.0\" uid=\"GeoChat.{{ payload.id }}-{{ global.ts }}\" type=\"b-t-f\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"0.0\" lon=\"0.0\" hae=\"9999999.0\" ce=\"1.0\" le=\"9999999.0\"/>\n   <detail>\n      <__chat senderCallsign=\"ASN-TAK\" chatroom=\"{{ payload.id }}\" groupOwner=\"false\" id=\"{{ payload.uid }}\" parent=\"RootContactGroup\" messageId=\"JunkMessageId-{{ payload.uid }}-{{ payload.ts }}\">\n         <chatgrp uid0=\"{{ payload.uid }}\" uid1=\"ASN-TAK-FAKEUID\" id=\"{{ payload.uid }}\" />\n      </__chat>\n      <__serverdestination destinations=\"Test:tcp:{{ payload.uid }}\" />\n      <remarks time=\"{{ global.starttime }}\" to=\"{{ payload.uid }}\" source=\"BAO.F.ATAK.ASN-TAK-FAKEUID\">Welcome to ASN-TAK for {{ global.serverid }} team!\n\nMake sure you are only on your team's server.\nRemember to properly exit the application after use.\n\nMore info at airsoftnorge.com\n      </remarks>\n      <marti>\n         <dest callsign=\"{{ payload.id }}\" />\n      </marti>\n   </detail>\n</event>\n",
-        "output": "str",
-        "x": 1440,
-        "y": 1240,
-        "wires": [
-            [
-                "7dac542fdde70908"
-            ]
-        ]
-    },
-    {
         "id": "ea685ea51d252cf4",
         "type": "debug",
         "z": "cfdaac38e6a0b145",
@@ -1113,6 +1002,78 @@
         "statusType": "auto",
         "x": 1070,
         "y": 720,
+        "wires": []
+    },
+    {
+        "id": "409a597044c74578",
+        "type": "inject",
+        "z": "cfdaac38e6a0b145",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 580,
+        "wires": [
+            [
+                "356e5f876b6cbe18"
+            ]
+        ]
+    },
+    {
+        "id": "356e5f876b6cbe18",
+        "type": "change",
+        "z": "cfdaac38e6a0b145",
+        "name": "SET SERVER COLOR",
+        "rules": [
+            {
+                "t": "set",
+                "p": "serverid",
+                "pt": "global",
+                "to": "SERVER_ID",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 580,
+        "wires": [
+            [
+                "0812b93e4c22e689"
+            ]
+        ]
+    },
+    {
+        "id": "0812b93e4c22e689",
+        "type": "debug",
+        "z": "cfdaac38e6a0b145",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 580,
         "wires": []
     },
     {
@@ -1194,215 +1155,23 @@
         "wires": []
     },
     {
-        "id": "891f1c8a50b53da8",
-        "type": "inject",
-        "z": "cfdaac38e6a0b145",
-        "name": "CONNECTION REMINDER",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "10800",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 280,
-        "y": 1320,
-        "wires": [
-            [
-                "ef2310c0a758608f"
-            ]
-        ]
+        "id": "dc169dd1444aa8a5",
+        "type": "tls-config",
+        "name": "TAK SSL",
+        "cert": "/data/certs/server.pem",
+        "key": "/data/certs/server.key",
+        "ca": "/data/certs/ca.pem",
+        "certname": "crtfile.crt",
+        "keyname": "keyfile.pem",
+        "caname": "ca.crt",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
     },
     {
-        "id": "c34895b9221a9d3b",
-        "type": "sqlite",
-        "z": "cfdaac38e6a0b145",
-        "mydb": "4e71ffcc.32ba8",
-        "sqlquery": "msg.topic",
-        "sql": "",
-        "name": "FirtSeen",
-        "x": 700,
-        "y": 1320,
-        "wires": [
-            [
-                "301b050434fd8739"
-            ]
-        ]
-    },
-    {
-        "id": "ef2310c0a758608f",
-        "type": "template",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "field": "topic",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "SELECT\n  *\nFROM\n  FirtSeen",
-        "output": "str",
-        "x": 520,
-        "y": 1320,
-        "wires": [
-            [
-                "c34895b9221a9d3b"
-            ]
-        ]
-    },
-    {
-        "id": "62b9c7a93eda5066",
-        "type": "template",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<event version=\"2.0\" uid=\"GeoChat.{{ payload.id }}-{{ global.ts }}\" type=\"b-t-f\" how=\"h-g-i-g-o\" time=\"{{ global.starttime }}\" start=\"{{ global.starttime }}\" stale=\"{{ global.staletime }}\">\n   <point lat=\"0.0\" lon=\"0.0\" hae=\"9999999.0\" ce=\"1.0\" le=\"9999999.0\"/>\n   <detail>\n      <__chat senderCallsign=\"ASN-TAK\" chatroom=\"{{ payload.id }}\" groupOwner=\"false\" id=\"{{ payload.uid }}\" parent=\"RootContactGroup\" messageId=\"JunkMessageId-{{ payload.id }}-{{ global.ts }}\">\n         <chatgrp uid0=\"{{ payload.uid }}\" uid1=\"ASN-TAK-FAKEUID\" id=\"{{ payload.uid }}\" />\n      </__chat>\n          <__serverdestination destinations=\"Test:tcp:{{ payload.uid }}\" />\n      <remarks time=\"{{ global.starttime }}\" to=\"{{ payload.uid }}\" source=\"BAO.F.ATAK.ASN-TAK-FAKEUID\">Reminder: {{ global.serverid }} connection is active. </remarks>\n      <marti>\n         <dest callsign=\"{{ payload.id }}\" />\n      </marti>\n   </detail>\n</event>\n",
-        "output": "str",
-        "x": 1440,
-        "y": 1320,
-        "wires": [
-            [
-                "7dac542fdde70908"
-            ]
-        ]
-    },
-    {
-        "id": "409a597044c74578",
-        "type": "inject",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "3600",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "5",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 230,
-        "y": 580,
-        "wires": [
-            [
-                "356e5f876b6cbe18"
-            ]
-        ]
-    },
-    {
-        "id": "356e5f876b6cbe18",
-        "type": "change",
-        "z": "cfdaac38e6a0b145",
-        "name": "SET SERVER COLOR",
-        "rules": [
-            {
-                "t": "set",
-                "p": "serverid",
-                "pt": "global",
-                "to": "SERVER_ID",
-                "tot": "env"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 560,
-        "y": 580,
-        "wires": [
-            [
-                "0812b93e4c22e689"
-            ]
-        ]
-    },
-    {
-        "id": "0812b93e4c22e689",
-        "type": "debug",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 810,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "acad3dfe57b8629e",
-        "type": "split",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 950,
-        "y": 1240,
-        "wires": [
-            [
-                "87c97adf9f63be1a"
-            ]
-        ]
-    },
-    {
-        "id": "301b050434fd8739",
-        "type": "split",
-        "z": "cfdaac38e6a0b145",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 950,
-        "y": 1320,
-        "wires": [
-            [
-                "62b9c7a93eda5066"
-            ]
-        ]
-    },
-    {
-        "id": "87c97adf9f63be1a",
-        "type": "function",
-        "z": "cfdaac38e6a0b145",
-        "name": "CHECK TIME DIFF",
-        "func": "timea = msg.payload.ts\ntimeb = global.get(\"ts\")\ntimec = timeb - timea\n\n\nmsg.timediff = {\n  timea:timea,\n  timeb:timeb,\n  diff:timec\n}\n\nif (msg.timediff.diff <= 15000){\n    return msg;\n}\nelse {\n    return;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1190,
-        "y": 1240,
-        "wires": [
-            [
-                "aee342a0874ef1b7"
-            ]
-        ]
+        "id": "4e71ffcc.32ba8",
+        "type": "sqlitedb",
+        "db": ":memory:",
+        "mode": "RWC"
     }
 ]
